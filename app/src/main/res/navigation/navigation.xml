@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation"
+    app:startDestination="@id/eventFragment">
+
+    <fragment
+        android:id="@+id/eventFragment"
+        android:name="test.mertech.eventplanner.mvvm.presentation.screens.EventScreen.EventFragment"
+        android:label="EventFragment" >
+        <action
+            android:id="@+id/action_eventFragment_to_contactsFragment"
+            app:destination="@id/contactsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/contactsFragment"
+        android:name="test.mertech.eventplanner.mvvm.presentation.screens.ContactsScreen.ContactsFragment"
+        android:label="ContactsFragment" />
+</navigation>

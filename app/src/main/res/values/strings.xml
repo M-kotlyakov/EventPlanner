@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Event Planner</string>
+    <string name="add_event_item_content_description">Add new event</string>
+</resources>
