@@ -1,4 +1,43 @@
 <resources>
     <string name="app_name">Event Planner</string>
     <string name="add_event_item_content_description">Add new event</string>
+
+    <string name="event_status">Статус</string>
+
+    // Error input status
+    <string name="invalid_title">Invalid title</string>
+    <string name="invalid_date">Invalid date</string>
+    <string name="invalid_city">Invalid city</string>
+    <string name="invalid_street">Invalid street</string>
+    <string name="invalid_status">Invalid status</string>
+
+    <string name="spinner_title">Выбор пункта</string>
+
+    // EventFragment
+    <string name="title_name">Мероприятие</string>
+    <string name="description_name">Описание</string>
+    <string name="date_name">Дата</string>
+    <string name="city_name">Город</string>
+    <string name="street_name">Улица</string>
+    <string name="house_name">Дом</string>
+    <string name="weather_name">Погода:</string>
+    <string name="status_of_event">Статус мероприятия</string>
+    <string name="status">Статус</string>
+    <string name="date_from_network_name">Дата</string>
+    <string name="address_from_network_name">Адресс</string>
+    <string name="temp_from_network_name">Температура</string>
+    <string name="turn_back_btn_name">Вернуться</string>
+    <string name="save_btn_name">Сохранить</string>
+    <string name="edit_btn_name">Редактировать</string>
+
+    <string name="event_status_expected">ожидается</string>
+    <string name="event_status_visited">посещено</string>
+    <string name="event_status_missed">пропущено</string>
+
+
+    <string-array name="status">
+        <item>expected</item>
+        <item>visited</item>
+        <item>missed</item>
+    </string-array>
 </resources>

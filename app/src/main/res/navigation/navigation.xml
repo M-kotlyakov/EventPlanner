@@ -1,19 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/eventFragment">
+    app:startDestination="@id/mainFragment">
 
     <fragment
-        android:id="@+id/eventFragment"
-        android:name="test.mertech.eventplanner.mvvm.presentation.screens.EventScreen.EventFragment"
-        android:label="EventFragment" >
+        android:id="@+id/mainFragment"
+        android:name="test.mertech.eventplanner.mvvm.presentation.screens.MainScreen.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
         <action
-            android:id="@+id/action_eventFragment_to_contactsFragment"
-            app:destination="@id/contactsFragment" />
+            android:id="@+id/action_mainFragment_to_eventFragment"
+            app:destination="@id/eventFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_seeEventFragment"
+            app:destination="@id/seeEventFragment" />
     </fragment>
     <fragment
-        android:id="@+id/contactsFragment"
-        android:name="test.mertech.eventplanner.mvvm.presentation.screens.ContactsScreen.ContactsFragment"
-        android:label="ContactsFragment" />
+        android:id="@+id/eventFragment"
+        android:name="test.mertech.eventplanner.mvvm.presentation.screens.eventScreen.EventFragment"
+        android:label="EventFragment"
+        tools:layout="@layout/fragment_event">
+        <action
+            android:id="@+id/action_eventFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/seeEventFragment"
+        android:name="test.mertech.eventplanner.mvvm.presentation.screens.SeeEventFRagment.SeeEventFragment"
+        android:label="fragment_see_event"
+        tools:layout="@layout/fragment_see_event" >
+        <argument
+            android:name="eventItem"
+            app:argType="test.mertech.eventplanner.mvvm.domain.entity.Event" />
+        <action
+            android:id="@+id/action_seeEventFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 </navigation>

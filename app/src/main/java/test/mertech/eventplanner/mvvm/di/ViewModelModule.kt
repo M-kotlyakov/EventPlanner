@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
-import test.mertech.eventplanner.mvvm.presentation.screens.ContactsScreen.ContactsViewModel
-import test.mertech.eventplanner.mvvm.presentation.screens.EventScreen.EventViewModel
+import test.mertech.eventplanner.mvvm.presentation.screens.eventScreen.EventViewModel
 import test.mertech.eventplanner.mvvm.presentation.screens.MainScreen.MainViewModel
+import test.mertech.eventplanner.mvvm.presentation.screens.SeeEventFRagment.SeeEventViewModel
 
 @Module
 interface ViewModelModule {
@@ -22,7 +22,7 @@ interface ViewModelModule {
     fun bindEventViewModel(impl: EventViewModel): ViewModel
 
     @IntoMap
-    @ViewModelKey(ContactsViewModel::class)
+    @ViewModelKey(SeeEventViewModel::class)
     @Binds
-    fun bindContactsViewModel(impl: ContactsViewModel): ViewModel
+    fun bindSeeEventViewModel(impl: SeeEventViewModel): ViewModel
 }

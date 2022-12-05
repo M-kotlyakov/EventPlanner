@@ -2,16 +2,22 @@ package test.mertech.eventplanner.mvvm.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
+import retrofit2.Response
 import test.mertech.eventplanner.mvvm.data.database.EventPlannerDao
 import test.mertech.eventplanner.mvvm.data.mapper.EventPlannerMapper
+import test.mertech.eventplanner.mvvm.data.network.api.ApiService
 import test.mertech.eventplanner.mvvm.domain.entity.Event
-import test.mertech.eventplanner.mvvm.domain.EventPlannerRepository
+import test.mertech.eventplanner.mvvm.domain.entity.yandexWeatherEntity.WeatherYandex
+import test.mertech.eventplanner.mvvm.domain.repository.EventPlannerRepository
 import javax.inject.Inject
 
 class EventPlannerRepositoryImpl @Inject constructor(
     private val eventPlannerDao: EventPlannerDao,
-    private val mapper: EventPlannerMapper
+    private val mapper: EventPlannerMapper,
+    private val apiService: ApiService
 ): EventPlannerRepository {
+
+    override suspend fun getWeather(lat: String, lon: String): Response<WeatherYandex> = apiService.getWeather(lat, lon)
 
     override suspend fun addEventItem(event: Event) {
         eventPlannerDao.addEventItem(mapper.mapEventEntityToDbModel(event))

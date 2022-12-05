@@ -1,8 +1,6 @@
 package test.mertech.eventplanner.mvvm.data.mapper
 
-import test.mertech.eventplanner.mvvm.data.database.entity.ContactsDbModel
 import test.mertech.eventplanner.mvvm.data.database.entity.EventDbModel
-import test.mertech.eventplanner.mvvm.domain.entity.Contacts
 import test.mertech.eventplanner.mvvm.domain.entity.Event
 import javax.inject.Inject
 
@@ -13,20 +11,13 @@ class EventPlannerMapper @Inject constructor() {
         title = event.title,
         description = event.description,
         date = event.date,
-        country = event.country,
         city = event.city,
         street = event.street,
         house = event.house,
-        blocks = event.blocks,
-        status = event.status
-    )
-
-    fun mapContactsEntityToDbModel(contacts: Contacts) = ContactsDbModel(
-        id = contacts.id,
-        name = contacts.name,
-        surName = contacts.surName,
-        jobTitle = contacts.jobTitle,
-        phoneNumber = contacts.phoneNumber
+        status = event.status,
+        celsius = event.celsius,
+        weather_description = event.weather_description,
+        imageUrl = event.imageUrl
     )
 
     fun mapEventDbModelToEntity(eventDbModel: EventDbModel) = Event(
@@ -34,27 +25,16 @@ class EventPlannerMapper @Inject constructor() {
         title = eventDbModel.title,
         description = eventDbModel.description,
         date = eventDbModel.date,
-        country = eventDbModel.country,
         city = eventDbModel.city,
         street = eventDbModel.street,
         house = eventDbModel.house,
-        blocks = eventDbModel.blocks,
-        status = eventDbModel.status
-    )
-
-    fun mapContactsDbModelToEntity(contactsDbModel: ContactsDbModel) = Contacts(
-        id = contactsDbModel.id,
-        name = contactsDbModel.name,
-        surName = contactsDbModel.surName,
-        jobTitle = contactsDbModel.jobTitle,
-        phoneNumber = contactsDbModel.phoneNumber
+        status = eventDbModel.status,
+        celsius = eventDbModel.celsius,
+        weather_description = eventDbModel.weather_description,
+        imageUrl = eventDbModel.imageUrl
     )
 
     fun mapEventListDbModelToListEntity(list: List<EventDbModel>) = list.map {
         mapEventDbModelToEntity(it)
-    }
-
-    fun mapContactsListDbModelToListEntity(list: List<ContactsDbModel>) = list.map {
-        mapContactsDbModelToEntity(it)
     }
 }
