@@ -7,25 +7,9 @@ import test.mertech.eventplanner.mvvm.domain.UseCases.GetWeatherUseCase
 import test.mertech.eventplanner.mvvm.domain.entity.yandexWeatherEntity.WeatherYandex
 import javax.inject.Inject
 
-class SeeEventViewModel@Inject constructor(
-    private val getWeatherUseCase: GetWeatherUseCase
-): ViewModel() {
+class SeeEventViewModel@Inject constructor(): ViewModel() {
 
     private val _weatherResponse = MutableLiveData<WeatherYandex>()
     val weatherResponse: LiveData<WeatherYandex>
         get() = _weatherResponse
-
-//    fun getWeather() = viewModelScope.launch {
-//
-//        getWeatherUseCase.getWeather().let {  response ->
-//
-//            if(response.isSuccessful) {
-//                Log.d("EventViewModel", "getWeather Response: ${response.message()}")
-//                Log.d("EventViewModel", "getWeather Response: ${response.body()}")
-//                _weatherResponse.postValue(response.body())
-//            } else {
-//                Log.d("EventViewModel", "getWeather ERROR Response: ${response.message()}")
-//            }
-//        }
-//    }
 }

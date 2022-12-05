@@ -2,10 +2,8 @@ package test.mertech.eventplanner.mvvm.presentation.screens.eventScreen
 
 import android.content.Context
 import android.os.Bundle
-import android.provider.ContactsContract.QuickContact.EXTRA_MODE
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,13 +19,14 @@ import test.mertech.eventplanner.mvvm.domain.entity.Event
 import test.mertech.eventplanner.mvvm.presentation.EventPlannerApp
 import test.mertech.eventplanner.mvvm.presentation.factory.ViewModelFactory
 import test.mertech.eventplanner.mvvm.presentation.screens.eventScreen.EventViewModel.Companion.DEFAULT_ADDRESS
-import test.mertech.eventplanner.mvvm.presentation.screens.eventScreen.EventViewModel.Companion.ICON_EXTENSION
 import test.mertech.eventplanner.mvvm.presentation.utils.loadSvg
 import javax.inject.Inject
 
 class EventFragment : Fragment() {
 
     private lateinit var vm: EventViewModel
+
+    private var spinnerSelected = ""
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -65,31 +64,6 @@ class EventFragment : Fragment() {
         addTextChangeListener()
     }
 
-//    private fun setupSpinner(): String {
-//        var spinnerSelected = ""
-//        val spinner = binding.spinner
-//        val status = resources.getStringArray(R.array.status)
-//        val spinnerAdapter = ArrayAdapter(
-//            requireActivity().application,
-//            android.R.layout.simple_spinner_item,
-//            status
-//        )
-//        spinner.adapter = spinnerAdapter
-//        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-//                Log.d("EventFragment", "status[position] = ${status[position]}")
-//                spinnerSelected = status[position]
-//                Log.d("EventFragment", "onItemSelected spinnerSelected = $spinnerSelected")
-//            }
-//
-//            override fun onNothingSelected(p0: AdapterView<*>?) {
-//                TODO("Not yet implemented")
-//            }
-//        }
-//        Log.d("EventFragment", "spinnerSelected = $spinnerSelected")
-//        return spinnerSelected
-//    }
-
     private fun getParams() {
         var item: Event? = null
         val args = arguments?.getString(EXTRA_MODE)
@@ -124,31 +98,7 @@ class EventFragment : Fragment() {
             address = "${args.city}, ${args.street}",
             application = requireActivity().application
         )
-
-        var spinnerSelected = args.status
-        val spinner = binding.spinner
-        val status = resources.getStringArray(R.array.status)
-        val spinnerAdapter = ArrayAdapter(
-            requireActivity().application,
-            android.R.layout.simple_spinner_item,
-            status
-        )
-        spinner.adapter = spinnerAdapter
-        when(args.status) {
-            EXPECTED -> spinner.setSelection(EXPECTED_POSITION)
-            VISITED -> spinner.setSelection(VISITED_POSITION)
-            MISSED -> spinner.setSelection(MISSED_POSITION)
-        }
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                spinnerSelected = status[position]
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-        }
-
+        setSpinnerValue(EDIT_MODE, args.status)
         binding.saveBtn.setOnClickListener {
 
             if (
@@ -156,8 +106,7 @@ class EventFragment : Fragment() {
                     binding.inputEditTextTitle.text.toString(),
                     binding.inputEditTextDate.text.toString(),
                     binding.inputEditTextCity.text.toString(),
-                    binding.inputEditTextStreet.text.toString(),
-                    spinnerSelected
+                    binding.inputEditTextStreet.text.toString()
                 )
             ) {
                 val item = args.copy(
@@ -179,36 +128,14 @@ class EventFragment : Fragment() {
         vm.getWeather(
             application = requireActivity().application
         )
-
-        var spinnerSelected = ""
-        val spinner = binding.spinner
-        val status = resources.getStringArray(R.array.status)
-        val spinnerAdapter = ArrayAdapter(
-            requireActivity().application,
-            android.R.layout.simple_spinner_item,
-            status
-        )
-        spinner.adapter = spinnerAdapter
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                Log.d("EventFragment", "status[position] = ${status[position]}")
-                spinnerSelected = status[position]
-                Log.d("EventFragment", "onItemSelected spinnerSelected = $spinnerSelected")
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-        }
-
+        setSpinnerValue(ADD_MODE)
         binding.saveBtn.setOnClickListener {
             if (
                 vm.validateInput(
                     binding.inputEditTextTitle.text.toString(),
                     binding.inputEditTextDate.text.toString(),
                     binding.inputEditTextCity.text.toString(),
-                    binding.inputEditTextStreet.text.toString(),
-                    spinnerSelected
+                    binding.inputEditTextStreet.text.toString()
                 )
             ) {
                 vm.addEventItem(
@@ -221,6 +148,35 @@ class EventFragment : Fragment() {
                     spinnerSelected
                 )
                 turnBack()
+            }
+        }
+    }
+
+    private fun setSpinnerValue(screenMode: String, spinnerStatus: String? = null) {
+        spinnerSelected = ""
+        val spinner = binding.spinner
+        val status = resources.getStringArray(R.array.status)
+        val spinnerAdapter = ArrayAdapter(
+            requireActivity().application,
+            android.R.layout.simple_spinner_item,
+            status
+        )
+        spinner.adapter = spinnerAdapter
+        if (screenMode == EDIT_MODE) {
+
+            when(spinnerStatus) {
+                EXPECTED -> spinner.setSelection(EXPECTED_POSITION)
+                VISITED -> spinner.setSelection(VISITED_POSITION)
+                MISSED -> spinner.setSelection(MISSED_POSITION)
+            }
+        }
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                spinnerSelected = status[position]
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
             }
         }
     }
