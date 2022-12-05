@@ -1,18 +1,20 @@
 package test.mertech.eventplanner.mvvm.domain.entity
 
+import java.io.Serializable
+
 data class Event(
     val id: Int = UNDEFINED_ID,
     val title: String,
     val description: String,
     val date: String,
-    val country: String,
     val city: String,
     val street: String,
     val house: String,
-    val blocks: String? = null,
     val status: String,
+    val celsius: String,
+    val weather_description: String,
     val imageUrl: String? = null
-) {
+): Serializable {
 
     companion object {
 

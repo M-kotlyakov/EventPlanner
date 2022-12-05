@@ -28,7 +28,7 @@
                 android:textColor="@color/white"
                 android:textSize="30sp"
                 android:textStyle="bold"
-                tools:text="Мероприятие 2" />
+                tools:text="@string/title_name"  />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -44,7 +44,8 @@
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    tools:text="статус" />
+                    android:text="@string/event_status"
+                    tools:text="@string/event_status" />
 
                 <TextView
                     android:id="@+id/tv_status_value"
@@ -53,7 +54,7 @@
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    tools:text="пропущено" />
+                    tools:text="@string/event_status_missed"/>
 
             </LinearLayout>
 
@@ -64,7 +65,15 @@
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                tools:text="дата 1" />
+                tools:text="@string/date_name" />
+            <Button
+                android:id="@+id/edit_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:icon="@drawable/ic_add"
+                app:cornerRadius="20dp"
+                android:text="@string/edit_btn_name"  />
+
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

@@ -9,6 +9,8 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="light_gray">#FFd3d3d3</color>
+    <color name="event_back">#3493DF</color>
     <color name="light_red">#FFf3997f</color>
-    <color name="light_green">#FFa1f486</color>
+    <color name="light_green">#5AA840</color>
+    <color name="light_green_button">#FFedfded</color>
 </resources>
