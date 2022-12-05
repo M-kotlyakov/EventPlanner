@@ -153,6 +153,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:entries="@array/status"
+                    android:textColor="#fff"
                     app:layout_constraintTop_toBottomOf="@id/inputLayout_house"
                     tools:ignore="MissingConstraints" />
             </LinearLayout>

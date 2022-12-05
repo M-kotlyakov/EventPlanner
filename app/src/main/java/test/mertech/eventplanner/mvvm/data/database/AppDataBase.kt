@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import test.mertech.eventplanner.mvvm.data.database.entity.EventDbModel
 
-@Database(entities = [EventDbModel::class], version = 8, exportSchema = false)
+@Database(entities = [EventDbModel::class], version = 1, exportSchema = false)
 abstract class AppDataBase: RoomDatabase() {
 
     abstract fun eventPlannerDao(): EventPlannerDao

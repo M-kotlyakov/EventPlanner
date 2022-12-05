@@ -107,9 +107,7 @@ class MainFragment: Fragment() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val position = viewHolder.adapterPosition
-                val item = eventAdapter.getCurrentItem(position)
-                eventAdapter.notifyItemRemoved(position)
+                val item = eventAdapter.currentList[viewHolder.adapterPosition]
                 vm.deleteEventItem(item)
             }
         }

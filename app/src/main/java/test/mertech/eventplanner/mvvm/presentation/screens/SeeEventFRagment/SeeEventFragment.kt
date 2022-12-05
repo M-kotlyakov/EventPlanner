@@ -1,9 +1,8 @@
 package test.mertech.eventplanner.mvvm.presentation.screens.SeeEventFRagment
 
-import android.annotation.SuppressLint
+
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -60,7 +59,6 @@ class SeeEventFragment: Fragment() {
     }
 
     private fun initViewsFromArgs() {
-        Log.d("EventAdapter", "SeeEventFragment:: item: ${args.eventItem}")
         val item = args.eventItem
         with(binding) {
             tvTitle.text = item.title
@@ -72,7 +70,6 @@ class SeeEventFragment: Fragment() {
             tvDescription.text = item.weather_description
             tvImageWeather.loadSvg(item.imageUrl!!)
         }
-        Log.d("EventAdapter", "${item.city}, ${item.street}, ${item.house}")
     }
 
     private fun observeViewModel() {

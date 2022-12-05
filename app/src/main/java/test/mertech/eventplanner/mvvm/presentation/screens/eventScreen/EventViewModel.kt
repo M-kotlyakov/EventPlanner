@@ -2,9 +2,7 @@ package test.mertech.eventplanner.mvvm.presentation.screens.eventScreen
 
 import android.annotation.SuppressLint
 import android.app.Application
-import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -118,8 +116,7 @@ class EventViewModel @Inject constructor(
                     event.title,
                     event.date,
                     event.city,
-                    event.street,
-                    event.status
+                    event.street
                 )
             ) {
                 viewModelScope.launch {
@@ -152,6 +149,10 @@ class EventViewModel @Inject constructor(
                         "Exceeding the limit of the forecast interval. " +
                             "The forecast is only available for 7 days."
                     )
+                } else if (diffBetweenDate < 0) {
+                    throw RuntimeException(
+                        "Date error, past number set. Cannot be edited"
+                    )
                 } else {
                     _icon.postValue(response.body()?.fact?.icon)
                     _weatherTemp.postValue(response.body()!!.forecasts[diffBetweenDate].parts.day_short.temp)
@@ -159,7 +160,9 @@ class EventViewModel @Inject constructor(
                     _weatherResponse.postValue(response.body())
                 }
             } else {
-                Log.d("EventViewModel", "getWeather ERROR Response: ${response.message()}")
+                throw RuntimeException(
+                    "getWeather ERROR Response: ${response.message()}"
+                )
             }
         }
     }
@@ -168,11 +171,8 @@ class EventViewModel @Inject constructor(
         title: String,
         date: String,
         city: String,
-        street: String,
-        status: String
+        street: String
     ): Boolean {
-        Log.d("validateInput", status)
-
         var result = true
         if (title.isBlank()) {
             _errorInputTitle.value = true
